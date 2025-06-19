@@ -1,0 +1,190 @@
+{
+    "title": "JustSheets style",
+    "description": "Defines a cell style for JustSheets",
+    "type": "object",
+    "properties": {
+        "style:name": {
+            "title": "Name",
+            "description": "Name of this style",
+            "type": "string"
+        },
+        "style:family": {
+            "title": "Family",
+            "description": "Indicates the type of style this is - only `table-cell` is supported for now",
+            "const": "table-cell",
+            "default": "table-cell"
+        },
+        "style:table-cell-properties": {
+            "title": "Cell properties",
+            "description": "Controls the styling of the cell",
+            "type": "object",
+            "properties": {
+                "fo:background-color": {
+                    "title": "Background color",
+                    "type": "string",
+                    "default": "transparent"
+                },
+                "fo:border-bottom": {
+                    "title": "Border (bottom)",
+                    "type": "string",
+                    "default": "none"
+                },
+                "fo:border-left": {
+                    "title": "Border (left)",
+                    "type": "string",
+                    "default": "none"
+                },
+                "fo:border-right": {
+                    "title": "Border (right)",
+                    "type": "string",
+                    "default": "none"
+                },
+                "fo:border-top": {
+                    "title": "Border (top)",
+                    "type": "string",
+                    "default": "none"
+                },
+                "fo:padding-bottom": {
+                    "title": "Padding (bottom)",
+                    "type": "string",
+                    "default": "4pt"
+                },
+                "fo:padding-left": {
+                    "title": "Padding (left)",
+                    "type": "string",
+                    "default": "4pt"
+                },
+                "fo:padding-right": {
+                    "title": "Padding (right)",
+                    "type": "string",
+                    "default": "4pt"
+                },
+                "fo:padding-top": {
+                    "title": "Padding (top)",
+                    "type": "string",
+                    "default": "4pt"
+                },
+                "style:text-align-source": {
+                    "title": "Horizontal alignment",
+                    "type": "string",
+                    "enum": [
+                        "left",
+                        "center",
+                        "right",
+                        "justify"
+                    ],
+                    "default": "left"
+                },
+                "style:vertical-align": {
+                    "title": "Vertical alignment",
+                    "type": "string",
+                    "enum": [
+                        "top",
+                        "center",
+                        "bottom"
+                    ],
+                    "default": "top"
+                },
+                "fo:wrap-option": {
+                    "title": "Wrapping",
+                    "type": "string",
+                    "enum": [
+                        "wrap",
+                        "nowrap"
+                    ],
+                    "default": "wrap"
+                },
+                "style:decimal-places": {
+                    "title": "Decimal places",
+                    "type": "integer",
+                    "default": "3"
+                }
+            }
+        },
+        "style:text-properties": {
+            "title": "Text properties",
+            "description": "Controls the styling of the text inside the cell",
+            "type": "object",
+            "properties": {
+                "fo:color": {
+                    "title": "Text color",
+                    "type": "string",
+                    "default": ""
+                },
+                "fo:background-color": {
+                    "title": "Background color",
+                    "type": "string",
+                    "default": "transparent"
+                },
+                "style:name": {
+                    "title": "Font name",
+                    "type": "string",
+                    "default": "Noto Sans"
+                },
+                "svg:font-family": {
+                    "title": "Font family",
+                    "type": "string",
+                    "default": "Noto Sans"
+                },
+                "style:font-family-generic": {
+                    "title": "Font family type",
+                    "type": "string",
+                    "enum": [
+                        "serif", 
+                        "sans-serif", 
+                        "monospace", 
+                        "cursive", 
+                        "fantasy"
+                    ],
+                    "default": "sans-serif"
+                },
+                "svg:font-size": {
+                    "title": "Font size",
+                    "type": "string",
+                    "default": "10pt"
+                },
+                "svg:font-weight": {
+                    "title": "Font weight",
+                    "type": "string",
+                    "enum": [
+                        "regular",
+                        "bold"
+                    ],
+                    "default": "regular"
+                },
+                "svg:font-style": {
+                    "title": "Font style",
+                    "type": "string",
+                    "enum": [
+                        "normal",
+                        "italic"
+                    ],
+                    "default": "normal"
+                },
+                "style:font-adornments": {
+                    "title": "Font adornments",
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "underline"
+                    ],
+                    "default": "none"
+                },
+                "style:font-pitch": {
+                    "title": "Font pitch",
+                    "type": "string",
+                    "default": "variable",
+                    "enum": [
+                        "variable"
+                    ]
+                }
+            }
+        }
+    },
+    "required": [
+        "name",
+        "family",
+        "style:table-cell-properties",
+        "style:text-properties"
+    ]
+}

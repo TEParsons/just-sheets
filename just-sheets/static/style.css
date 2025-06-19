@@ -1,0 +1,25 @@
+:root {
+    --red: #BC2C1A;
+    --purple: #7A4F8D;
+    --blue: #3772FF;
+    --green: #5FAD56;
+    --yellow: #EEBA0B;
+    --orange: #DD770B;
+
+    --base: #FFFFFF;
+    --mantle: #F9F9FA;
+    --crust: #F2F2F4;
+    --overlay: #E5E5E7;
+    --outline: #AAADB4;
+    --text: #000000;
+}
+
+body, 
+html {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    transition: border-color .5s, background-color .5s, z-index .5s;
+}
