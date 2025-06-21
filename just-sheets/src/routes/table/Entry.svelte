@@ -1,8 +1,20 @@
 <script>
     import { getContext } from "svelte";
+    import { writable, derived, get } from "svelte/store"
 
     let focus = getContext("focus");
     export let handle;
+
+    let nocell = writable("");
+    let value = nocell;
+    focus.subscribe((focus) => {
+        if (focus === null || focus === undefined) {
+            value = nocell;
+            return
+        }
+
+        value = focus.value
+    })
 
 
     
@@ -13,12 +25,10 @@
     class=entry-box
     disabled={!$focus}
     bind:this={handle}
-    value={$focus ? $focus.handle.value : ""}
-    on:input={(evt) => {
-        if ($focus) {
-            $focus.handle.value = handle.value;
-        }
-    }}
+    bind:value={
+        () => $value,
+        (content) => value.set(content)
+    }
 >
 
 <style>

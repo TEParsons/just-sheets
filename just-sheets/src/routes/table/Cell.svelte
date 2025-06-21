@@ -7,8 +7,10 @@
     export let row;
 
     let style = writable(undefined);
+    let value = writable("");
     export let data = {
         handle: undefined,
+        value: value,
         row: row,
         col: col,
         style: style
@@ -36,6 +38,10 @@
     id=cell-{row}-{col}
     type=text 
     bind:this={data.handle}
+    bind:value={
+        () => $value,
+        (content) => value.set(content)
+    }
     class:selected={$selection.includes(data)}
     class:focus={$focus === data}
     style:grid-row-start={parseInt(row)+2}
