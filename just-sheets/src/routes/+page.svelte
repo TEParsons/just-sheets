@@ -1,25 +1,13 @@
 <script>
     import { setContext } from "svelte";
-    import { Notebook, NotebookPage } from "./notebook";
-    import { Table } from "./table";
-    import { HyperFormula } from 'hyperformula';
+    import { Workbook } from "./workbook";
 
-    // set up formulas engine
-    let formulas = HyperFormula.buildEmpty({ licenseKey: 'gpl-v3' })
-    setContext("formulas", formulas)
 
 </script>
 
+<Workbook>
 
-
-<Notebook>
-    <NotebookPage>
-        <Table></Table>
-    </NotebookPage>
-    <NotebookPage>
-        <Table></Table>
-    </NotebookPage>
-</Notebook>
+</Workbook>
 
 
 

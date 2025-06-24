@@ -11,7 +11,7 @@
     })
     export let title = writable("Sheet");
 
-    let current = getContext("current");
+    let currentPage = getContext("currentPage");
     let siblings = getContext("pages");
     let tab;
 
@@ -21,24 +21,24 @@
 
             return value
         })
-        if (get(current) === undefined) {
-            current.set(tab)
+        if (get(currentPage) === undefined) {
+            currentPage.set(tab)
         }
     })
 </script>
 
 <div
     class=notebook-page
-    style:display={$current === tab ? "block" : "none"}
+    style:display={$currentPage === tab ? "block" : "none"}
 >
     <slot></slot>
 </div>
 
 <button 
     bind:this={tab}
-    class:active={$current === tab}
+    class:active={$currentPage === tab}
     class=notebook-tab
-    on:click={(evt) => current.set(tab)}
+    on:click={(evt) => currentPage.set(tab)}
     on:dblclick={(evt) => {
         renaming.set(true);
     }}

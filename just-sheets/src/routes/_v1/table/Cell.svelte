@@ -7,10 +7,12 @@
     export let row;
 
     let style = writable(undefined);
-    let value = writable("");
+    export let value = writable("");
+    export let calculated = writable("");
     export let data = {
         handle: undefined,
         value: value,
+        calculated: calculated,
         row: row,
         col: col,
         style: style
@@ -33,15 +35,11 @@
     import styles from "../styles/packaged_styles.json";
 </script>
 
-<input 
+<td 
     class=cell
     id=cell-{row}-{col}
     type=text 
     bind:this={data.handle}
-    bind:value={
-        () => $value,
-        (content) => value.set(content)
-    }
     class:selected={$selection.includes(data)}
     class:focus={$focus === data}
     style:grid-row-start={parseInt(row)+2}
@@ -62,6 +60,16 @@
         )
     }}
 >
+    {$value}
+</td>
+
+<div
+    class=calculated
+    class:selected={$selection.includes(data)}
+    class:focus={$focus === data}
+    style:grid-row-start={parseInt(row)+2}
+    style:grid-column-start={parseInt(col)+2}
+>{$calculated}</div>
 
 
 
@@ -82,5 +90,11 @@
     }
     .cell.focus {
         background-color: #ffffff;
+    }
+    .calculated {
+        z-index: 1;
+        background-color: transparent;
+        height: 1rem;
+        width: 1rem;
     }
 </style>

@@ -1,11 +1,14 @@
 <script>
     import { setContext } from "svelte";
     import { writable } from "svelte/store";
-
-    let pages = writable([])
-
-    setContext("pages", pages)
-    setContext("current", writable(undefined))
+    import { HyperFormula } from "hyperformula";
+    
+    let pages = writable([]);
+    setContext("pages", pages);
+    let current = writable(undefined);
+    setContext("current", current);
+    let formulas = HyperFormula.buildEmpty({ licenseKey: 'gpl-v3' });
+    setContext("formulas", formulas);
 </script>
 
 <div
