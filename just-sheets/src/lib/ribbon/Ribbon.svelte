@@ -14,12 +14,11 @@
         grid-column-end: end;
 
         display: grid;
-        grid-auto-flow: row;
+        grid-auto-flow: column;
 
-        padding: 0.5rem;
+        padding: 1rem;
         background-color: var(--mantle);
-        border: 1px solid var(--overlay);
+        border-bottom: 1px solid var(--overlay);
         outline: none;
-        border-radius: .5rem;
     }
 </style>

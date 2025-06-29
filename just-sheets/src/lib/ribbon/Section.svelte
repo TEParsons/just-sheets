@@ -31,4 +31,7 @@
         position: absolute;
         bottom: 0;
     }
+    .ribbon-section:not(:first-child) {
+        border-left: 1px solid var(--overlay)
+    }
 </style>
