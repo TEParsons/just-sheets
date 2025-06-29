@@ -1,6 +1,6 @@
 <script>
     import Ribbon from "./utils/Ribbon.svelte";
-    import RibbonButton from "./utils/Button.svelte";
+    import RibbonButton from "../../../../lib/ribbon/Button.svelte";
     import RibbonSection from "./utils/Section.svelte";
     import RibbonSelect from "./utils/Select.svelte";
 

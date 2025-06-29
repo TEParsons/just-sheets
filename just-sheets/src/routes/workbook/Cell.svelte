@@ -1,5 +1,6 @@
 <script>
     import { getContext } from "svelte";
+    import { allStyles } from "./styles";
 
     let {
         row = undefined,
@@ -21,7 +22,7 @@
 <td
     bind:this={info.handle}
     class=cell
-    style={info.style}
+    style={allStyles[info.style]}
     onclick={() => {
         // set focus
         selection.focus = info;

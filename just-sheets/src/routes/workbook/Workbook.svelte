@@ -3,6 +3,7 @@
     import { Notebook, NotebookPage } from "$lib/notebook";
     import Table from "./Table.svelte";
     import { HyperFormula } from 'hyperformula';
+    import Ribbon from "./ribbon/Ribbon.svelte";
 
     // set up formulas engine
     let formulas = HyperFormula.buildEmpty({ licenseKey: 'gpl-v3' })
@@ -21,6 +22,7 @@
 
 </script>
 
+<Ribbon></Ribbon>
 <Notebook>
     <NotebookPage>
         <Table name="Sheet 1"></Table>
