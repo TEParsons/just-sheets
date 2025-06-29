@@ -15,28 +15,35 @@
     let sheet = formulas.getSheetId(name)
     // get selection element
     let selection = getContext("selection")
-    // stores the raw data of this table
-    let data = $state(
-        Array(rows).fill(
-            Array(cols).fill("")
-        )
-    )
-    // stores the content displayed by each cell
-    let content = $derived.by(() => {
-        formulas.setSheetContent(sheet, data)
-        return formulas.getSheetValues(sheet)
-    })
-    // stores other attributes about each cell
+    // stores attributes about each cell
     let cells = $state(
         Array(rows).fill(
             Array(cols).fill({
                 style: "",
+                data: "",
                 row: undefined,
                 col: undefined,
                 handle: undefined
             })
         )
     )
+    // stores the content displayed by each cell
+    let content = $derived.by(() => {
+        // get data as a 2d array
+        let data = [];
+        for (let row in cells) {
+            data.push([])
+            for (let col in cells[row]) {
+                data[row].push(
+                    cells[row][col].data
+                )
+            }
+        }
+        // run formula engine
+        formulas.setSheetContent(sheet, data)
+
+        return formulas.getSheetValues(sheet)
+    })
     // stores key modifiers
     let modifiers = $state({
         Control: false,
@@ -58,31 +65,27 @@
         cells.push(
             Array(cells[0].length).fill({
                 style: "",
+                data: "",
                 row: undefined,
                 col: undefined,
                 handle: undefined
             })
         )
-        data.push(
-            Array(cells[0].length).fill("")
-        )
     }
     function removeRow() {
         cells.pop()
-        data.pop()
     }
     function addCol() {
         for (let i in cells) {
             cells[i].push({
-                style: ""
+                style: "",
+                data: ""
             })
-            data[i].push("")
         }
     }
     function removeCol() {
         for (let i in cells) {
             cells[i].pop()
-            data[i].pop()
         }
     }
     // convert between numeric and alphabetical indices
@@ -101,7 +104,9 @@
 <input
     class=entry-box
     bind:this={entry}
-    oninput={(evt) => data[selection.focus.row][selection.focus.col] = entry.value}
+    oninput={(evt) => {
+        cells[selection.focus.row][selection.focus.col].data = entry.value;
+    }}
 >
 <table>
     <tbody>
@@ -183,7 +188,7 @@
                 row={row}
                 col={col}
                 siblings={cells}
-                value={data[row][col]}
+                value={cells[row][col].data}
                 content={content[row][col]}
             ></Cell>
             {/each}

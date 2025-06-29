@@ -10,7 +10,9 @@
         children
     } = $props();
     // get info
-    let info = $derived(siblings[row][col])
+    let info = siblings[row][col]
+    info.row = row;
+    info.col = col;
     // get context
     let selection = getContext("selection")
     let focusEntry = getContext("focusEntry")
@@ -22,9 +24,7 @@
     style={info.style}
     onclick={() => {
         // set focus
-        selection.focus.handle = info;
-        selection.focus.row = row;
-        selection.focus.col = col;
+        selection.focus = info;
         // add to selection
         if (!selection.selected.includes(info)) {
             selection.selected = [info]
@@ -34,7 +34,7 @@
     }}
     class:focus={selection.focus.row === row && selection.focus.col === col}
     class:selected={selection.selected.includes(info)}
-    class:has-formula={String(value) !== String(content)}
+    class:has-formula={String(value).startsWith("=")}
 >
     {content}
 </td>
