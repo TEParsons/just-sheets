@@ -1,19 +1,30 @@
 <script>
+    import { Dialog } from "$lib/dialog"
     let {
         label=undefined,
         icon=undefined,
-        onclick=(evt) => {}
+        snippet=undefined
     } = $props()
+
+    let dlg;
 
 </script>
 
 <button
-    onclick={onclick}
+    onclick={() => dlg.showModal()}
 >
     <span>{label}</span>
     {#if icon}
     <img src={icon} alt={label} />
     {/if}
+    <Dialog
+        bind:this={dlg}
+    >
+        {#if snippet}
+        {@render snippet()}
+        {/if}
+    </Dialog>
+    
 </button>
 
 <style>

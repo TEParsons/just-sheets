@@ -69,7 +69,6 @@
         top: .5rem;
         left: .5rem;
         color: var(--overlay);
-        font-family: var(--mono)
     }
     .cell.has-formula:hover::after,
     .cell.has-formula.focus::after {

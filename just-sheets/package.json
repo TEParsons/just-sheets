@@ -19,6 +19,7 @@
 	"dependencies": {
 		"from-xml": "^0.1.11",
 		"hyperformula": "^3.0.0",
+		"json-schema-defaults": "^0.4.0",
 		"simple-odf": "^3.0.3",
 		"to-xml": "^0.1.11"
 	}

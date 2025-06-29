@@ -12,12 +12,17 @@
     --overlay: #E5E5E7;
     --outline: #AAADB4;
     --text: #000000;
+
+    --heading: Noto Sans;
+    --body: Noto Sans;
+    --mono: JetBrains Mono;
 }
 
 body, 
 html {
     padding: 0;
     margin: 0;
+    font-family: var(--body);
 }
 
 * {
