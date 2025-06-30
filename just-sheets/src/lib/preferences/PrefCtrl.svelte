@@ -23,7 +23,13 @@
     {#each schema.oneOf as val}
     {#if val.const === prefs[key]}
     <blockquote>
+        {#if val.accreditation}
+        <p>Powered by</p>
+        <img class=accreditation src={val.accreditation} alt=accreditation />
+        {/if}
+        <p>
         {val.description}
+        </p>
         {#each val.examples as example}
         <pre>{example}</pre>
         {/each}
@@ -55,5 +61,15 @@
     }
     pre {
         font-family: var(--mono)
+    }
+    img.accreditation {
+        height: 1.5rem;
+    }
+
+    p {
+        margin: .5rem 0;
+    }
+    p:first-child {
+        margin-top: 0;
     }
 </style>
