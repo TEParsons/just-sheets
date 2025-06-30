@@ -4,8 +4,8 @@
     "type": "object",
     "properties": {
         "formulaEngine": {
-            "title": "Formula engine",
-            "description": "What system should we use for formulas?",
+            "title": "Default formula engine",
+            "description": "What system should be the default for workbooks to use for formulas?",
             "default": "hyperformula",
             "type": "string",
             "oneOf": [

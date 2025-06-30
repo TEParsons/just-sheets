@@ -19,6 +19,12 @@
     })
     setContext("selection", selection)
 
+    import { Document } from "$lib/document";
+    let doc = $state(
+        new Document()
+    )
+    setContext("document", doc)
+
 
 </script>
 

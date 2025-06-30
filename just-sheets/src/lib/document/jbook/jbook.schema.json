@@ -1,0 +1,94 @@
+{
+    "title": ".jbook Format Specification",
+    "description": "JSON schema laying out the expected structure of a .jbook file (which is JSON under the hood)",
+    "type": "object",
+    "properties": {
+        "properties": {
+            "title": "Properties",
+            "description": "General properties describing this workbook",
+            "type": "object",
+            "properties": {
+                "formulaEngine": {
+                    "title": "Formulas style",
+                    "description": "What style are formulas in this workbook written in?",
+                    "default": "hyperformula",
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "title": "Excel",
+                            "description": "Write formulas in much the same way as in Microsoft Excel or Google Sheets:",
+                            "examples": [
+                                "=MEAN(A1:B3)"
+                            ],
+                            "accreditation": "/assets/accreditations/hyperformula.png",
+                            "const": "hyperformula"
+                        },
+                        {
+                            "title": "Python",
+                            "description": "Write formulas using Python, with the workbook as a dict called `sheets` with each sheet by name as a numpy array, and the current sheet as a numpy array called `data`:",
+                            "examples": [
+                                "=data[0:1, 0:2].mean()"
+                            ],
+                            "accreditation": "/assets/accreditations/python_numpy.png",
+                            "const": "python"
+                        }
+                    ]
+                }
+            }
+        },
+        "styles": {
+            "title": "Styles",
+            "description": "Named styles for this sheet, which a cell can refer to",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Style",
+                "description": "An individual style, items should conform to CSS styles as applicable to a <td> element",
+                "type": "object"
+            }
+        },
+        "data": {
+            "title": "Data",
+            "description": "Object with each sheet as a property, by sheet name",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Spreadsheet",
+                "description": "An individual spreadsheet in this workbook",
+                "type": "array",
+                "additionalItems": {
+                    "title": "Spreadsheet Row",
+                    "description": "An individual row of a spreadsheet",
+                    "type": "array",
+                    "additionalItems": {
+                        "title": "Cell",
+                        "description": "An individual cell in a spreadsheet",
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "title": "Data",
+                                "description": "This cell's data",
+                                "type": "string"
+                            },
+                            "style": {
+                                "title": "Style",
+                                "description": "The name of this cell's style",
+                                "type": "string",
+                                "default": ""
+                            },
+                            "note": {
+                                "title": "Note",
+                                "description": "An optional note which can be attached to a cell",
+                                "type": "string",
+                                "default": ""
+                            }
+                        },
+                        "required": [
+                            "data"
+                        ]
+                    }
+                },
+                "default": [[]]
+            }
+        }
+    },
+    "required": ["properties", "styles", "data"]
+}
