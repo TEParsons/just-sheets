@@ -1,67 +1,49 @@
 <script>
     import { getContext, onMount } from "svelte";
-    import { get, writable } from "svelte/store";
 
-    let renaming = writable(false);
-    let renameCtrl = writable(undefined);
-    renameCtrl.subscribe((value) => {
-        if (value) {
-            value.focus()
-        }
-    })
-    export let title = writable("Sheet");
+    let {
+        title="",
+        children
+    } = $props()
 
-    let currentPage = getContext("currentPage");
     let siblings = getContext("pages");
-    let tab;
-
-    onMount(() => {
-        siblings.update((value) => {
-            value.push(tab);
-
-            return value
-        })
-        if (get(currentPage) === undefined) {
-            currentPage.set(tab)
-        }
-    })
+    let index = $state(siblings.count);
+    siblings.count += 1;
+    let renaming = $state(false);
 </script>
 
-<div
-    class=notebook-page
-    style:display={$currentPage === tab ? "block" : "none"}
->
-    <slot></slot>
-</div>
-
 <button 
-    bind:this={tab}
-    class:active={$currentPage === tab}
     class=notebook-tab
-    on:click={(evt) => currentPage.set(tab)}
-    on:dblclick={(evt) => {
-        renaming.set(true);
-    }}
+    class:active={siblings.current === index}
+    onclick={(evt) => siblings.current = index}
+    ondblclick={(evt) => renaming = true}
 >
-    {#if $renaming}
+    {#if renaming}
     <input
         class=rename-ctrl
-        bind:this={$renameCtrl}
-        bind:value={$title}
+        bind:value={title}
         hidden={!renaming}
-        on:focusout={(evt) => renaming.set(false)}
-        on:keypress={(evt) => {
-            if (evt.key == "Enter") {
-                renaming.set(false)
+        onfocusout={(evt) => renaming = false}
+        onkeypress={(evt) => {
+            if (evt.key === "Enter") {
+                renaming = false
             }
         }}
     >
     {:else}
     <span>
-        {$title}
+        {title}
     </span>
     {/if}
 </button>
+{#if siblings.current === index}
+<div 
+    class=notebook-page
+    style:grid-column-end="span {siblings.count + 1}"
+>
+    {@render children()}
+</div>
+{/if}
 
 <style>
     .notebook-tab {
@@ -89,11 +71,11 @@
         position: relative;
         grid-row-start: page;
         grid-column-start: 1;
-        grid-column-end: var(--npages);
         border-bottom: 1px solid var(--overlay);
         padding: 1rem;
         background-color: var(--base);
         overflow: auto;
+        justify-self: stretch;
     }
     .rename-ctrl {
         border: none;
@@ -101,6 +83,6 @@
         color: inherit;
         background-color: transparent;
         padding: 0;
-        margin: -.5rem 0;
+        margin: 0;
     }
 </style>

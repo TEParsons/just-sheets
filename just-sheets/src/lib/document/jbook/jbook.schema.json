@@ -50,6 +50,9 @@
             "title": "Data",
             "description": "Object with each sheet as a property, by sheet name",
             "type": "object",
+            "default": {
+                "Sheet 1": [[""]]
+            },
             "additionalProperties": {
                 "title": "Spreadsheet",
                 "description": "An individual spreadsheet in this workbook",

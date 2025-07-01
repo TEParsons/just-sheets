@@ -5,8 +5,9 @@ export const schema = rawSchema;
 export const defaults = jsonSchemaDefaults(schema);
 
 
-export class Document {
+export class Document extends Object {
     constructor() {
+        super();
         this.properties = defaults.properties
         this.data = defaults.data
         this.style = defaults.style

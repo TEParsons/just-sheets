@@ -2,6 +2,7 @@
     import { Dialog } from "$lib/dialog";
     import { prefs as rootprefs, schema } from "$lib/preferences"
     import ParamCtrl from "$lib/params/ParamCtrl.svelte";
+    import { Notebook, NotebookPage } from "$lib/notebook";
 
     let prefs = rootprefs;
     // buffer to store values - reset on cancel, applied on okay/apply
@@ -32,11 +33,19 @@
         prefs = properties;
     }}
 >
-    {#each [...Object.entries(schema.properties)] as [key, property]}
-    <ParamCtrl
-        key={key}
-        schema={property}
-        bind:value={properties[key]}
-    ></ParamCtrl>
-    {/each}
+    <Notebook>
+        {#each [...Object.entries(schema.properties)] as [categName, categ]}
+            <NotebookPage
+                title={categName}
+            >
+                {#each [...Object.entries(schema.properties)] as [key, property]}
+                    <ParamCtrl
+                        key={key}
+                        schema={property}
+                        bind:value={properties[key]}
+                    ></ParamCtrl>
+                {/each}
+            </NotebookPage>
+        {/each}
+    </Notebook>
 </Dialog>

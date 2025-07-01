@@ -20,17 +20,29 @@
     setContext("selection", selection)
 
     import { Document } from "$lib/document";
-    let doc = $state(
-        new Document()
-    )
+    let doc = $state(new Document())
     setContext("document", doc)
 
 
 </script>
+<div class=workbook>
+    <Ribbon></Ribbon>
+    <Notebook
+        onnew={(evt) => doc.data[`Sheet ${Object.keys(doc.data).length + 1}`] = [[""]]}
+    >
+        {#each Object.keys(doc.data) as name}
+            <NotebookPage title={name}>
+            <Table name={name}></Table>
+            </NotebookPage>
+        {/each}
+    </Notebook>
+</div>
 
-<Ribbon></Ribbon>
-<Notebook>
-    <NotebookPage>
-        <Table name="Sheet 1"></Table>
-    </NotebookPage>
-</Notebook>
+<style>
+    .workbook {
+        display: grid;
+        grid-template-columns: [start] 1fr [end];
+        grid-template-rows: [ribbon] auto 1fr;
+        height: 100vh;
+    }
+</style>
