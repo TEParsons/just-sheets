@@ -1,7 +1,11 @@
  <script>
     import { Dialog } from "$lib/dialog";
-    import { prefs as rootPrefs, schema } from "$lib/preferences"
-    import PrefCtrl from "$lib/preferences/PrefCtrl.svelte";
+    import { prefs as rootprefs, schema } from "$lib/preferences"
+    import ParamCtrl from "$lib/params/ParamCtrl.svelte";
+
+    let prefs = rootprefs;
+    // buffer to store values - reset on cancel, applied on okay/apply
+    let properties = Object.assign({}, prefs);
 
     let handle;
     export function showModal() {
@@ -10,22 +14,29 @@
     export function close() {
         handle.close()
     }
-    let prefs = $state(rootPrefs)
-
  </script>
 
 <Dialog 
     bind:this={handle}
     title="Preferences"
-    onokay={(evt) => {}}
-    oncancel={(evt) => {}}
-    onapply={(evt) => {}}
+    onokay={(evt) => {
+        // apply properties buffer
+        prefs = properties;
+    }}
+    oncancel={(evt) => {
+        // reset properties buffer
+        properties = Object.assign({}, prefs);
+    }}
+    onapply={(evt) => {
+        // apply properties buffer
+        prefs = properties;
+    }}
 >
     {#each [...Object.entries(schema.properties)] as [key, property]}
-    <PrefCtrl
+    <ParamCtrl
         key={key}
         schema={property}
-        bind:prefs={prefs}
-    ></PrefCtrl>
+        bind:value={properties[key]}
+    ></ParamCtrl>
     {/each}
 </Dialog>

@@ -11,7 +11,7 @@
         shown = $bindable(true)
     } = $props()
 
-    let handles = {}
+    let handles = $state({})
 
 </script>
 
@@ -21,11 +21,13 @@
         <StylePicker></StylePicker>
         <RibbonButton label="Manage styles"></RibbonButton>
     </RibbonSection>
+    <RibbonSection label="Document">
+        <RibbonButton label="Document properties" onclick={() => handles.propsDlg.showModal()}></RibbonButton>
+        <PropertiesDialog bind:this={handles.propsDlg}></PropertiesDialog>
+    </RibbonSection>
     <RibbonSection label="Settings">
         <RibbonButton label="Preferences" onclick={() => handles.prefsDlg.showModal()}></RibbonButton>
         <PreferencesDialog bind:this={handles.prefsDlg}></PreferencesDialog>
-        <RibbonButton label="Properties" onclick={() => handles.propsDlg.showModal()}></RibbonButton>
-        <PropertiesDialog bind:this={handles.propsDlg}></PropertiesDialog>
     </RibbonSection>
 </Ribbon>
 {/if}

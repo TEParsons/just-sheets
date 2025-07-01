@@ -1,8 +1,13 @@
  <script>
-    import { getContext } from "svelte";
+    import { getContext, onMount } from "svelte";
     import { Dialog } from "$lib/dialog";
     import { schema } from "$lib/document"
-    import PrefCtrl from "$lib/preferences/PrefCtrl.svelte";
+    import ParamCtrl from "$lib/params/ParamCtrl.svelte";
+
+    let doc = getContext("document")
+
+    // buffer to store values - reset on cancel, applied on okay/apply
+    let properties = Object.assign({}, doc.properties);
 
     let handle;
     export function showModal() {
@@ -11,24 +16,29 @@
     export function close() {
         handle.close()
     }
-
-    let doc = getContext("document")
-    console.log(doc)
-
  </script>
 
 <Dialog 
     bind:this={handle}
     title="Properties"
-    onokay={(evt) => {}}
-    oncancel={(evt) => {}}
-    onapply={(evt) => {}}
+    onokay={(evt) => {
+        // apply properties buffer
+        doc.properties = properties;
+    }}
+    oncancel={(evt) => {
+        // reset properties buffer
+        properties = Object.assign({}, doc.properties);
+    }}
+    onapply={(evt) => {
+        // apply properties buffer
+        doc.properties = properties;
+    }}
 >
     {#each [...Object.entries(schema.properties.properties.properties)] as [key, property]}
-    <PrefCtrl
+    <ParamCtrl
         key={key}
         schema={property}
-        bind:prefs={doc.properties}
-    ></PrefCtrl>
+        bind:value={properties[key]}
+    ></ParamCtrl>
     {/each}
 </Dialog>

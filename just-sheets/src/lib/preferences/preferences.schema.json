@@ -3,29 +3,38 @@
     "description": "User preferences for Just Sheets",
     "type": "object",
     "properties": {
-        "formulaEngine": {
-            "title": "Default formula engine",
-            "description": "What system should be the default for workbooks to use for formulas?",
-            "default": "hyperformula",
-            "type": "string",
-            "oneOf": [
-                {
-                    "title": "HyperFormula (Excel-style)",
-                    "description": "Write formulas in much the same way as in Microsoft Excel or Google Sheets:",
-                    "examples": [
-                        "=MEAN(A1:B3)"
-                    ],
-                    "const": "hyperformula"
-                },
-                {
-                    "title": "Python (numpy)",
-                    "description": "Write formulas using Python, with the workbook as a dict called `sheets` with each sheet by name as a numpy array, and the current sheet as a numpy array called `data`:",
-                    "examples": [
-                        "=data[0:1, 0:2].mean()"
-                    ],
-                    "const": "python"
+        "documentDefaults": {
+            "title": "Document defaults",
+            "description": "Default properties for a new document to have",
+            "type": "object",
+            "properties": {
+                "formulaEngine": {
+                    "title": "Formulas style",
+                    "description": "What style are formulas in this workbook written in?",
+                    "default": "hyperformula",
+                    "type": "string",
+                    "oneOf": [
+                        {
+                            "title": "Excel",
+                            "description": "Write formulas in much the same way as in Microsoft Excel or Google Sheets:",
+                            "examples": [
+                                "=MEAN(A1:B3)"
+                            ],
+                            "accreditation": "/assets/accreditations/hyperformula.png",
+                            "const": "hyperformula"
+                        },
+                        {
+                            "title": "Python",
+                            "description": "Write formulas using Python, with the workbook as a dict called `sheets` with each sheet by name as a numpy array, and the current sheet as a numpy array called `data`:",
+                            "examples": [
+                                "=data[0:1, 0:2].mean()"
+                            ],
+                            "accreditation": "/assets/accreditations/python_numpy.png",
+                            "const": "python"
+                        }
+                    ]
                 }
-            ]
+            }
         }
     }
 }
