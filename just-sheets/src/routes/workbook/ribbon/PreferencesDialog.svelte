@@ -36,13 +36,16 @@
     <Notebook>
         {#each [...Object.entries(schema.properties)] as [categName, categ]}
             <NotebookPage
-                title={categName}
+                title={categ.title}
             >
-                {#each [...Object.entries(schema.properties)] as [key, property]}
+                <h1>{categ.title}</h1>
+                <p>{categ.description}</p>
+                <hr>
+                {#each [...Object.entries(categ.properties)] as [key, property]}
                     <ParamCtrl
                         key={key}
                         schema={property}
-                        bind:value={properties[key]}
+                        bind:value={properties[categName][key]}
                     ></ParamCtrl>
                 {/each}
             </NotebookPage>

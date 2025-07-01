@@ -4,7 +4,7 @@
     "type": "object",
     "properties": {
         "documentDefaults": {
-            "title": "Document defaults",
+            "title": "Defaults",
             "description": "Default properties for a new document to have",
             "type": "object",
             "properties": {
@@ -31,6 +31,28 @@
                             ],
                             "accreditation": "/assets/accreditations/python_numpy.png",
                             "const": "python"
+                        }
+                    ]
+                }
+            }
+        },
+        "appearance": {
+            "title": "Appearance",
+            "description": "Change the look and feel of Just Sheets",
+            "type": "object",
+            "properties": {
+                "theme": {
+                    "title": "Theme",
+                    "description": "Colour scheme for Just Sheets",
+                    "default": "light",
+                    "oneOf": [
+                        {
+                            "title": "Light",
+                            "const": "light"
+                        },
+                        {
+                            "title": "Dark",
+                            "const": "dark"
                         }
                     ]
                 }
