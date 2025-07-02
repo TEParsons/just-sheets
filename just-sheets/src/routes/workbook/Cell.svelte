@@ -17,7 +17,6 @@
     // get context
     let selection = getContext("selection")
     let modifiers = getContext("modifiers")
-    let focusEntry = getContext("focusEntry")
 </script>
 
 <td
@@ -47,8 +46,6 @@
             // set focus
             selection.focus = info;
         }
-        // give focus to entry box
-        focusEntry(value)
     }}
     class:focus={selection.focus.row === row && selection.focus.col === col}
     class:selected={selection.selected.includes(info)}

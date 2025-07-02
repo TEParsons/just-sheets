@@ -8,6 +8,8 @@
     // set up formulas engine
     let formulas = HyperFormula.buildEmpty({ licenseKey: 'gpl-v3' })
     setContext("formulas", formulas)
+    // get handle of entry box
+    let entry;
     // stores the currently selected cells
     let selection = $state({
         selected: [],
@@ -33,6 +35,9 @@
                 selection.selected = [selection.focus];
             }
         }
+        // focus and reset entry box
+        entry.value = selection.focus.data ? selection.focus.data : "";
+        entry.focus();
     })
     // stores key modifiers
     let modifiers = $state({
@@ -51,6 +56,13 @@
 
 <div class=workbook>
     <Ribbon></Ribbon>
+    <input
+        class=entry-box
+        bind:this={entry}
+        oninput={(evt) => {
+            selection.focus.data = entry.value;
+        }}
+    >
     <Notebook
         onnew={(evt) => doc.data[`Sheet ${Object.keys(doc.data).length + 1}`] = [[""]]}
     >
@@ -87,7 +99,20 @@
     .workbook {
         display: grid;
         grid-template-columns: [start] 1fr [end];
-        grid-template-rows: [ribbon] auto 1fr;
+        grid-template-rows: [ribbon] auto [entry] min-content [table] 1fr;
         height: 100vh;
+    }
+
+    .entry-box {
+        padding: .5rem;
+        margin: 1rem;
+        width: calc(100% - 2rem);
+        box-sizing: border-box;
+        border: 1px solid var(--overlay);
+        outline: none;
+        border-radius: .5rem;
+    }
+    .entry-box:focus {
+        border: 1px solid var(--blue);
     }
 </style>

@@ -46,15 +46,6 @@
     })
     // modifier keys
     let modifiers = getContext("modifiers")
-    // restore focus to the entry
-    let entry;
-    function focusEntry(value) {
-        // set entry value
-        entry.value = value;
-        // focus
-        entry.focus()
-    }
-    setContext("focusEntry", focusEntry)
     // transformation functions for the table
     function addRow() {
         cells.push(
@@ -96,13 +87,7 @@
     }
 </script>
 
-<input
-    class=entry-box
-    bind:this={entry}
-    oninput={(evt) => {
-        cells[selection.focus.row][selection.focus.col].data = entry.value;
-    }}
->
+
 <table>
     <tbody>
         <tr>
@@ -319,19 +304,6 @@
         border-collapse: separate;
         border-spacing: 0;
         margin: 0;
-    }
-
-    .entry-box {
-        padding: .5rem;
-        margin: 1rem;
-        width: calc(100% - 2rem);
-        box-sizing: border-box;
-        border: 1px solid var(--overlay);
-        outline: none;
-        border-radius: .5rem;
-    }
-    .entry-box:focus {
-        border: 1px solid var(--blue);
     }
 
     .row-lbl,
