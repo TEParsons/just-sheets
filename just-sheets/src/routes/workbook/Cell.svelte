@@ -16,6 +16,7 @@
     info.col = col;
     // get context
     let selection = getContext("selection")
+    let modifiers = getContext("modifiers")
     let focusEntry = getContext("focusEntry")
 </script>
 
@@ -24,11 +25,27 @@
     class=cell
     style={allStyles[info.style]}
     onclick={() => {
-        // set focus
-        selection.focus = info;
-        // add to selection
-        if (!selection.selected.includes(info)) {
-            selection.selected = [info]
+        // if holding shift, expand selection
+        if (modifiers.Shift) {
+            // get indices of last selection
+            let oldRow = $state.snapshot(selection.focus.row);
+            let oldCol = $state.snapshot(selection.focus.col);
+            // get cells between there and here
+            let targets = [];
+            for (let targetRow of siblings.slice(
+                Math.min(oldRow, info.row), Math.max(oldRow, info.row)+1
+            )) {
+                for (let target of targetRow.slice(
+                    Math.min(oldCol, info.col), Math.max(oldCol, info.col)+1
+                )) {
+                    targets.push(target)
+                }
+            }
+            // add to selection
+            selection.selected = targets;
+        } else {
+            // set focus
+            selection.focus = info;
         }
         // give focus to entry box
         focusEntry(value)

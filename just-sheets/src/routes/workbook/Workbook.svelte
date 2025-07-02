@@ -22,19 +22,33 @@
         }
     })
     setContext("selection", selection)
-    // if focus moves outside selection, it is the new selection
+    // if focus moves outside selection...
     $effect(() => {
         if (!selection.selected.includes(selection.focus)) {
-            selection.selected = [selection.focus];
+            // if pressing control, add focus to selection
+            if (modifiers.Control) {
+                selection.selected.push(selection.focus);
+            } else {
+                // otherwise, focus is the new selection
+                selection.selected = [selection.focus];
+            }
         }
     })
+    // stores key modifiers
+    let modifiers = $state({
+        Control: false,
+        Command: false,
+        Alt: false,
+        Shift: false
+    })
+    setContext("modifiers", modifiers)
 
     import { Document } from "$lib/document";
     let doc = $state(new Document())
     setContext("document", doc)
-
-
 </script>
+
+
 <div class=workbook>
     <Ribbon></Ribbon>
     <Notebook
@@ -47,6 +61,27 @@
         {/each}
     </Notebook>
 </div>
+
+
+<svelte:window 
+    on:keydown={
+        (evt) => {
+            // CTRL, CMD, ALT, SHIFT: set modifier mode
+            if (evt.key in modifiers) {
+                modifiers[evt.key] = true
+            }
+        }
+    }
+    on:keyup={
+        (evt) => {
+            // CTRL, CMD, ALT, SHIFT: leave modifier mode
+            if (evt.key in modifiers) {
+                modifiers[evt.key] = false
+            }
+        }
+    } 
+/>
+
 
 <style>
     .workbook {

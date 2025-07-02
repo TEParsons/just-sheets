@@ -44,13 +44,8 @@
 
         return formulas.getSheetValues(sheet)
     })
-    // stores key modifiers
-    let modifiers = $state({
-        Control: false,
-        Command: false,
-        Alt: false,
-        Shift: false
-    })
+    // modifier keys
+    let modifiers = getContext("modifiers")
     // restore focus to the entry
     let entry;
     function focusEntry(value) {
@@ -212,10 +207,6 @@
 <svelte:window 
     on:keydown={
         (evt) => {
-            // CTRL, CMD, ALT, SHIFT: set modifier mode
-            if (evt.key in modifiers) {
-                modifiers[evt.key] = true
-            }
             // ESC: clear selection
             if (evt.key === "Escape") {
                 // unfocus whichever cell has focus
@@ -320,16 +311,7 @@
                 }
             }
         }
-    } 
-    on:keyup={
-        (evt) => {
-            // CTRL, CMD, ALT, SHIFT: leave modifier mode
-            if (evt.key in modifiers) {
-                modifiers[evt.key] = false
-            }
-        }
-    } 
-    
+    }     
 />
 
 <style>
