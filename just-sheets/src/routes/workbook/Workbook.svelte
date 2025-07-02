@@ -59,6 +59,7 @@
     <input
         class=entry-box
         bind:this={entry}
+        disabled={selection.focus.handle === undefined}
         oninput={(evt) => {
             selection.focus.data = entry.value;
         }}
