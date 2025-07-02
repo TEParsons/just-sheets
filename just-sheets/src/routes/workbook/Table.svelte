@@ -149,7 +149,7 @@
                 {int2alpha(col)}
             </td>
             {/each}
-            <td rowspan={cells.length + 1}>
+            <td>
                 <button 
                     class=add-col-btn
                     class:ctrlmode={modifiers.Control || modifiers.Command}
@@ -195,8 +195,7 @@
         </tr>
         {/each}
         <tr>
-            <td></td>
-            <td colspan={cells[0].length}>
+            <td>
                 <button
                     class="add-row-btn"
                     class:ctrlmode={modifiers.Control || modifiers.Command}
@@ -368,19 +367,19 @@
         background-color: var(--red);
     }
     .add-col-btn {
-        margin: 1rem -1px;
+        margin: -1px;
         border-left: none;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         width: 2rem;
-        height: calc(100% - 2rem);
+        height: calc(100% + 2px);
     }
     .add-row-btn {
-        margin: -1px 1rem;
+        margin: -1px;
         border-top: none;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         height: 2rem;
-        width: calc(100% - 2rem);
+        width: calc(100% + 2px);
     }
 </style>
