@@ -1,0 +1,449 @@
+{
+    "properties": {
+        "formulaEngine": "hyperformula"
+    },
+    "styles": {
+        "Heading": {
+            "background-color": "#3772FF",
+            "text-wrap": "wrap",
+            "color": "#FFFFFF",
+            "font-weight": "bold",
+            "font-style": "normal"
+        },
+        "Subheading": {
+            "background-color": "#F2F2F4",
+            "text-wrap": "nowrap",
+            "color": "#000000",
+            "font-weight": "regular",
+            "font-style": "italic"
+        },
+        "Body": {
+            "background-color": "transparent",
+            "text-wrap": "wrap",
+            "color": "#000000",
+            "font-weight": "regular",
+            "font-style": "normal"
+        },
+        "Good": {
+            "background-color": "#5FAD56",
+            "text-wrap": "wrap",
+            "color": "#FFFFFF",
+            "font-weight": "regular",
+            "font-style": "normal"
+        },
+        "Mixed": {
+            "background-color": "#DD770B",
+            "text-wrap": "wrap",
+            "color": "#FFFFFF",
+            "font-weight": "regular",
+            "font-style": "normal"
+        },
+        "Bad": {
+            "background-color": "#BC2C1A",
+            "text-wrap": "wrap",
+            "color": "#FFFFFF",
+            "font-weight": "regular",
+            "font-style": "normal"
+        }
+    },
+    "data": {
+        "Sheet 1": [
+            [
+                {
+                    "data": "",
+                    "style": "Heading",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "Heading",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "Heading",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "Heading",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "Subheading",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "Subheading",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "Subheading",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "Subheading",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ],
+            [
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                },
+                {
+                    "data": "",
+                    "style": "",
+                    "note": ""
+                }
+            ]
+        ]
+    }
+}

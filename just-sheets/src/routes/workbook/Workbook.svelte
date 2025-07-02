@@ -48,8 +48,8 @@
     })
     setContext("modifiers", modifiers)
 
-    import { Document } from "$lib/document";
-    let doc = $state(new Document())
+    import { newDocument } from "$lib/document";
+    let doc = $state(newDocument("headers"))
     setContext("document", doc)
 </script>
 
@@ -69,7 +69,7 @@
     >
         {#each Object.keys(doc.data) as name}
             <NotebookPage title={name}>
-            <Table name={name}></Table>
+            <Table name={name} initialCells={doc.data[name]}></Table>
             </NotebookPage>
         {/each}
     </Notebook>

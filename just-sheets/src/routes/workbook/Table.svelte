@@ -4,8 +4,15 @@
 
     let {
         name = "Sheet", 
-        rows = 16,
-        cols = 8
+        initialCells = Array(16).fill(
+            Array(8).fill({
+                style: "",
+                data: "",
+                row: undefined,
+                col: undefined,
+                handle: undefined
+            })
+        )
     } = $props();
     // setup formulas
     let formulas = getContext("formulas"); 
@@ -16,17 +23,7 @@
     // get selection element
     let selection = getContext("selection")
     // stores attributes about each cell
-    let cells = $state(
-        Array(rows).fill(
-            Array(cols).fill({
-                style: "",
-                data: "",
-                row: undefined,
-                col: undefined,
-                handle: undefined
-            })
-        )
-    )
+    let cells = $state(initialCells)
     // stores the content displayed by each cell
     let content = $derived.by(() => {
         // get data as a 2d array

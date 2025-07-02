@@ -51,7 +51,15 @@
             "description": "Object with each sheet as a property, by sheet name",
             "type": "object",
             "default": {
-                "Sheet 1": [[""]]
+                "Sheet 1": [
+                    [
+                        {
+                            "data": "",
+                            "style": "",
+                            "note": ""
+                        }
+                    ]
+                ]
             },
             "additionalProperties": {
                 "title": "Spreadsheet",
