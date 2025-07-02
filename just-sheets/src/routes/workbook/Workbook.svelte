@@ -15,9 +15,19 @@
             handle: undefined,
             row: undefined,
             col: undefined
+        },
+        tabbing: {
+            active: false,
+            root: 0
         }
     })
     setContext("selection", selection)
+    // if focus moves outside selection, it is the new selection
+    $effect(() => {
+        if (!selection.selected.includes(selection.focus)) {
+            selection.selected = [selection.focus];
+        }
+    })
 
     import { Document } from "$lib/document";
     let doc = $state(new Document())

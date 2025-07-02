@@ -135,14 +135,13 @@
                 onclick={(evt) => {
                     // clear selection
                     selection.selected = []
+                    // shift selection if needed
+                    if (selection.focus.col !== col) {
+                        selection.focus = cells[0][col]
+                    }
                     // select whole column
                     for (let row of cells) {
                         selection.selected.push(row[col])
-                    }
-                    // shift focus if needed
-                    if (selection.focus.col !== col) {
-                        selection.focus.col = col
-                        selection.focus.handle = cells[selection.focus.row][col]
                     }
                 }}
             >
@@ -170,14 +169,13 @@
                 onclick={(evt) => {
                     // clear selection
                     selection.selected = []
+                    // shift selection if needed
+                    if (selection.focus.row !== row) {
+                        selection.focus = cells[row][0]
+                    }
                     // select whole column
                     for (let cell of cells[row]) {
                         selection.selected.push(cell)
-                    }
-                    // shift focus if needed
-                    if (selection.focus.row !== row) {
-                        selection.focus.row = row
-                        selection.focus.handle = cells[row][selection.focus.col]
                     }
                 }}
             >
@@ -221,84 +219,88 @@
             // ESC: clear selection
             if (evt.key === "Escape") {
                 // unfocus whichever cell has focus
-                selection.focus.handle = undefined;
-                selection.focus.row = undefined;
-                selection.focus.col = undefined;
+                selection.focus = {
+                    handle: undefined,
+                    row: undefined,
+                    col: undefined
+                };
                 // deselect whichever cells are selected          
-                selection.selected = []
+                selection.selected = [];
             }
             // TAB: move on 1 col, or carriage return
             if (evt.key === "Tab") {
-                if (selection.focus) {
-                    // // stop normal behaviour
-                    // evt.preventDefault();
-                    // // if this was first tab, set tab root
-                    // if (!tabRoot.tabbing) {
-                    //     tabRoot.col = $focus.col
-                    // }
-                    // // preserve tab root for when focus overwrites it
-                    // let preservedTabRoot = tabRoot.col
-                    // // flip direction in shift mode
-                    // let flip = $shiftmode ? -1 : 1
-                    // // get cell 1 to the right
-                    // let targets = indexCells($focus.row, $focus.col+1*flip)
-                    // // if no cell 1 to the right, move on to next row
-                    // if (!targets.length) {
-                    //     targets = indexCells($focus.row+1*flip, $shiftmode ? $cols - 1 : tabRoot.col)
-                    // }
-                    // // if no next row, move back to origin
-                    // if (!targets.length) {
-                    //     targets = indexCells(0, 0)
-                    // }
-                    // focus.set(targets[0])
-                    // // restore tab root
-                    // tabRoot.col = preservedTabRoot
-                    // tabRoot.tabbing = true
+                if (selection.focus.handle) {
+                    // stop normal behaviour
+                    evt.preventDefault();
+                    // if this was first tab, set tab root
+                    if (!selection.tabbing.active) {
+                        selection.tabbing.root = $state.snapshot(selection.focus.col);
+                    }
+                    // take note that we're tabbing
+                    selection.tabbing.active = true;
+                    // get current row and col
+                    let row = $state.snapshot(selection.focus.row);
+                    let col = $state.snapshot(selection.focus.col);
+                    // move one cell left/right according to shift mode
+                    if (modifiers.Shift) {
+                        col = Math.max(0, col-1)
+                    } else {
+                        col = Math.min(cells[row].length-1, col+1)
+                    }
+                    selection.focus = cells[row][col]
                 }
             }
             // ENTER: carriage retun (or newline in shift mode)
             if (evt.key === "Enter") {
-                // if ($focus) {
-                //     // stop normal behaviour
-                //     evt.preventDefault();
-                //     // behave differently according to shift mode
-                //     if ($shiftmode) {
-                //         // add a newline
-                //         $focus.handle.value += "\n"
-                //     } else {
-                //         // carriage return
-                //         let targets = indexCells($focus.row+1, tabRoot.col)
-                //         // move
-                //         if (targets.length) {
-                //             focus.set(targets[0])
-                //         }
-                //     }
-                // }
+                if (selection.focus.handle) {
+                    // stop normal behaviour
+                    evt.preventDefault();
+                    // get current row and col
+                    let row = $state.snapshot(selection.focus.row);
+                    let col = $state.snapshot(selection.focus.col);
+                    // move down or up 1 row according to shift condition
+                    if (modifiers.Shift) {
+                        row = Math.max(0, row-1);
+                    } else {
+                        row = Math.min(cells.length-1, row+1);
+                    }
+                    // if tabbing, return col to tab root
+                    if (selection.tabbing.active) {
+                        col = $state.snapshot(selection.tabbing.root);
+                    }
+                    // tabbing is no longer active
+                    selection.tabbing.active = false;
+                    // apply new focus
+                    selection.focus = cells[row][col];
+                }
             }
             // UP, DOWN, LEFT, RIGHT: move around sheet
             if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(evt.key)) {
-                // if ($focus) {
-                //     // stop normal behaviour
-                //     evt.preventDefault();
-                //     // get new cell
-                //     let targets;
-                //     if (evt.key === "ArrowUp") {
-                //         targets = indexCells($focus.row-1, $focus.col)
-                //     }
-                //     if (evt.key === "ArrowDown") {
-                //         targets = indexCells($focus.row+1, $focus.col)
-                //     }
-                //     if (evt.key === "ArrowLeft") {
-                //         targets = indexCells($focus.row, $focus.col-1)
-                //     }
-                //     if (evt.key === "ArrowRight") {
-                //         targets = indexCells($focus.row, $focus.col+1)
-                //     }
-                //     // move
-                //     if (targets.length) {
-                //         focus.set(targets[0])
-                //     }
-                // }
+                if (selection.focus.handle) {
+                    // stop normal behaviour
+                    evt.preventDefault();
+                    // stop tabbing
+                    selection.tabbing.active = false;
+                    selection.tabbing.root = 0;
+                    // get current row and col
+                    let row = $state.snapshot(selection.focus.row);
+                    let col = $state.snapshot(selection.focus.col);
+                    // adjust indices based on keypress
+                    if (evt.key === "ArrowUp") {
+                        row = Math.max(0, row-1);
+                    }
+                    if (evt.key === "ArrowDown") {
+                        row = Math.min(cells.length-1, row+1);
+                    }
+                    if (evt.key === "ArrowLeft") {
+                        col = Math.max(0, col-1);
+                    }
+                    if (evt.key === "ArrowRight") {
+                        col = Math.min(cells[row].length-1, col+1);
+                    }
+                    // apply new focus
+                    selection.focus = cells[row][col];
+                }
             }
         }
     } 
