@@ -213,7 +213,7 @@
     on:keydown={
         (evt) => {
             // CTRL, CMD, ALT, SHIFT: set modifier mode
-            if (evt.key in modifiers && !modifiers[evt.key]) {
+            if (evt.key in modifiers) {
                 modifiers[evt.key] = true
             }
             // ESC: clear selection
@@ -298,6 +298,23 @@
                     if (evt.key === "ArrowRight") {
                         col = Math.min(cells[row].length-1, col+1);
                     }
+                    // if holding shift, update selection
+                    if (modifiers.Shift) {
+                        // for each selected cell...
+                        for (let cell of selection.selected) {
+                            let target;
+                            // get matching cell of same row/col (depending on direction) 
+                            if (["ArrowUp", "ArrowDown"].includes(evt.key)) {
+                                target = cells[row][cell.col]
+                            } else (
+                                target = cells[cell.row][col]
+                            )
+                            // add it to the selection
+                            if (!selection.selected.includes(target)) {
+                                selection.selected.push(target)
+                            }
+                        }
+                    }
                     // apply new focus
                     selection.focus = cells[row][col];
                 }
@@ -307,7 +324,7 @@
     on:keyup={
         (evt) => {
             // CTRL, CMD, ALT, SHIFT: leave modifier mode
-            if (evt.key in modifiers && modifiers[evt.key]) {
+            if (evt.key in modifiers) {
                 modifiers[evt.key] = false
             }
         }
