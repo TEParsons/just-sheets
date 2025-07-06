@@ -302,6 +302,7 @@
         border-collapse: separate;
         border-spacing: 0;
         margin: 0;
+        table-layout: fixed
     }
 
     .row-lbl,

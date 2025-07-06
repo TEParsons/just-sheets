@@ -36,6 +36,7 @@
 <td
     bind:this={info.handle}
     class=cell
+    class:has-note={info.note}
     style={allStyles[style]}
     onclick={() => {
         // if holding shift, expand selection
@@ -66,11 +67,20 @@
     class:has-formula={String(value).startsWith("=")}
 >
     {content}
+    {#if info.note}
+    <div 
+        class=note
+        style={allStyles[style]}
+    >
+        {info.note}
+    </div>
+    {/if}
 </td>
 
 <style>
     .cell {
         position: relative;
+        overflow: visible;
         border: 1px solid var(--crust);
         border-radius: 0;
         padding: .5rem 1rem;
@@ -80,7 +90,7 @@
         width: 8em;
         min-width: calc(1em + 1rem);
         line-height: 1em;
-        overflow: hidden;
+        z-index: 0;
     }
     .cell.selected {
         border-color: var(--blue);
@@ -88,6 +98,7 @@
     }
     .cell.focus {
         background-color: var(--base);
+        z-index: 1;
     }
     .cell.has-formula::after {
         content: "∫";
@@ -101,5 +112,31 @@
     .cell.has-formula:hover::after,
     .cell.has-formula.focus::after {
         color: var(--blue);
+    }
+    .cell.has-note::after {
+        content: "";
+        position: absolute;
+        top: 0; right: 0;
+        border-left: .3rem solid transparent;
+        border-right: .3rem solid var(--yellow);
+        border-bottom: .3rem solid transparent;
+        border-top: .3rem solid var(--yellow);
+    }
+
+    .note {
+        display: none;
+        position: absolute;
+        left: calc(100% + .5rem); top: .5rem;
+        padding: 1rem;
+        border: 1px solid var(--yellow);
+        max-width: 20rem;
+        inline-size: max-content;
+        border-radius: .5rem;
+        background-color: var(--base);
+        box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.1);
+        z-index: 1;
+    }
+    .cell.focus .note {
+        display: block;
     }
 </style>
