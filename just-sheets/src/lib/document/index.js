@@ -15,3 +15,15 @@ export function newDocument(template=null) {
         return jsonSchemaDefaults(schema)
     }
 }
+
+export function newSheet(template=null) {
+    let workbook
+    if (template in templates) {
+        workbook = templates[template]
+        
+    } else {
+        workbook = jsonSchemaDefaults(schema)
+    }
+    
+    return Object.assign({}, workbook.data[Object.keys(workbook.data)[0]])
+}

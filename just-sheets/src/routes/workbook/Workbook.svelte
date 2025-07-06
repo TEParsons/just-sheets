@@ -3,6 +3,7 @@
     import { Notebook, NotebookPage } from "$lib/notebook";
     import Table from "./Table.svelte";
     import { HyperFormula } from 'hyperformula';
+    import { newDocument, newSheet } from "$lib/document";
     import Ribbon from "./ribbon/Ribbon.svelte";
 
     // set up formulas engine
@@ -48,7 +49,6 @@
     })
     setContext("modifiers", modifiers)
 
-    import { newDocument } from "$lib/document";
     let doc = $state(newDocument("headers"))
     setContext("document", doc)
 </script>
@@ -65,7 +65,7 @@
         }}
     >
     <Notebook
-        onnew={(evt) => doc.data[`Sheet ${Object.keys(doc.data).length + 1}`] = [[""]]}
+        onnew={(evt) => doc.data[`Sheet ${Object.keys(doc.data).length + 1}`] = newSheet()}
     >
         {#each Object.keys(doc.data) as name}
             <NotebookPage title={name}>
