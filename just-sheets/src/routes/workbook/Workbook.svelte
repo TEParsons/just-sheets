@@ -2,6 +2,7 @@
     import { setContext } from "svelte";
     import { Notebook, NotebookPage } from "$lib/notebook";
     import Table from "./Table.svelte";
+    import EntryBox from "./EntryBox.svelte";
     import { HyperFormula } from 'hyperformula';
     import { newDocument, newSheet } from "$lib/document";
     import Ribbon from "./ribbon/Ribbon.svelte";
@@ -9,8 +10,10 @@
     // set up formulas engine
     let formulas = HyperFormula.buildEmpty({ licenseKey: 'gpl-v3' })
     setContext("formulas", formulas)
-    // get handle of entry box
+    // setup entry box
     let entry;
+    // stores current entry mode
+    let entryMode = $state()
     // stores the currently selected cells
     let selection = $state({
         selected: [],
@@ -25,21 +28,7 @@
         }
     })
     setContext("selection", selection)
-    // if focus moves outside selection...
-    $effect(() => {
-        if (!selection.selected.includes(selection.focus)) {
-            // if pressing control, add focus to selection
-            if (modifiers.Control) {
-                selection.selected.push(selection.focus);
-            } else {
-                // otherwise, focus is the new selection
-                selection.selected = [selection.focus];
-            }
-        }
-        // focus and reset entry box
-        entry.value = selection.focus.data ? selection.focus.data : "";
-        entry.focus();
-    })
+    
     // stores key modifiers
     let modifiers = $state({
         Control: false,
@@ -56,14 +45,7 @@
 
 <div class=workbook>
     <Ribbon></Ribbon>
-    <input
-        class=entry-box
-        bind:this={entry}
-        disabled={selection.focus.handle === undefined}
-        oninput={(evt) => {
-            selection.focus.data = entry.value;
-        }}
-    >
+    <EntryBox></EntryBox>
     <Notebook
         onnew={(evt) => doc.data[`Sheet ${Object.keys(doc.data).length + 1}`] = newSheet()}
     >
@@ -103,17 +85,5 @@
         grid-template-rows: [ribbon] auto [entry] min-content [table] 1fr;
         height: 100vh;
     }
-
-    .entry-box {
-        padding: .5rem;
-        margin: 1rem;
-        width: calc(100% - 2rem);
-        box-sizing: border-box;
-        border: 1px solid var(--overlay);
-        outline: none;
-        border-radius: .5rem;
-    }
-    .entry-box:focus {
-        border: 1px solid var(--blue);
-    }
+    
 </style>

@@ -1,10 +1,12 @@
 :root {
-    --red: #BC2C1A;
-    --purple: #7A4F8D;
+    
+    
     --blue: #3772FF;
-    --green: #5FAD56;
-    --yellow: #EEBA0B;
+    --purple: #972CAF;
+    --red: #BC2C1A;
     --orange: #DD770B;
+    --yellow: #EEBA0B;
+    --green: #5FAD56;
 
     --base: #FFFFFF;
     --mantle: #F9F9FA;
@@ -27,4 +29,39 @@ html {
 
 * {
     transition: border-color .2s, background-color .2s, color .2s, z-index .2s;
+}
+
+/* universal styles */
+
+select {
+    font-size: 1rem;
+    border-radius: .5rem;
+    padding: .5rem;
+    border: 1px solid var(--overlay);
+    outline: none;
+    transition: border-color .5s;
+}
+select:enabled:hover {
+    border-color: var(--blue);
+}
+
+input {
+    padding: .5rem;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: .5rem;
+    border: 1px solid var(--overlay);
+}
+input:focus {
+    border: 1px solid var(--blue);
+}
+
+
+button {
+    border: 1px solid var(--overlay);
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+}
+button:enabled:hover {
+    border-color: var(--blue);
 }

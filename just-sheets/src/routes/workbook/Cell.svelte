@@ -17,12 +17,26 @@
     // get context
     let selection = getContext("selection")
     let modifiers = getContext("modifiers")
+    let formulas = getContext("formulas")
+    let sheet = getContext("sheet")
+
+    let style = $derived.by(() => {
+        if (info.style.startsWith("=")) {
+            try {
+                return formulas.calculateFormula(info.style, sheet)
+            } catch {
+                return null
+            }
+        } else {
+            return info.style
+        }
+    })
 </script>
 
 <td
     bind:this={info.handle}
     class=cell
-    style={allStyles[info.style]}
+    style={allStyles[style]}
     onclick={() => {
         // if holding shift, expand selection
         if (modifiers.Shift) {

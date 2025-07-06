@@ -20,6 +20,7 @@
         formulas.addSheet(name);
     }
     let sheet = formulas.getSheetId(name)
+    setContext("sheet", sheet)
     // get selection element
     let selection = getContext("selection")
     // stores attributes about each cell
@@ -321,6 +322,7 @@
     .add-col-btn,
     .add-row-btn {
         margin: .5rem;
+        padding: auto;
         border-radius: .5rem;
         background-color: var(--crust);
         border: 1px solid var(--overlay);

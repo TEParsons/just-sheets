@@ -24,22 +24,19 @@
     bind:value={getStyle, setStyle}
     disabled={!selection.selected.length}
 >
-    <option val={null}></option>
+    <option val={null} class=special-option></option>
     {#each Object.keys(styles) as styleName}
-    <option val={styleName}>{styleName}</option>
+    <option value={styleName}>{styleName}</option>
     {/each}
+    <option value="=" class="formula-option special-option">Formula...</option>
+    
 </select>
 
 <style>
-    select {
-        font-size: 1rem;
-        border-radius: .5rem;
-        padding: .5rem;
-        border: 1px solid var(--overlay);
-        outline: none;
-        transition: border-color .5s;
+    .special-option {
+        background-color: var(--mantle);
     }
-    select:enabled:hover {
-        border-color: var(--blue);
+    .formula-option {
+        color: var(--blue);
     }
 </style>
