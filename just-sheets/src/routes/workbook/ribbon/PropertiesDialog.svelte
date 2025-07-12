@@ -20,7 +20,7 @@
 
 <Dialog 
     bind:this={handle}
-    title="Properties"
+    title="Document properties"
     onokay={(evt) => {
         // apply properties buffer
         doc.properties = properties;

@@ -16,7 +16,7 @@
     {/each}
 </select>
 {#each schema.oneOf as val}
-    {#if val.const === value}
+    {#if val.const === value && (val.accreditation || val.description || val.examples) }
         <blockquote>
             {#if val.accreditation}
                 <p>Powered by</p>
@@ -41,8 +41,10 @@
         padding: .5rem;
     }
     blockquote {
-        margin: 0 1rem;
-        color: var(--outline);
+        border-bottom: 1px solid var(--overlay);
+        background-color: var(--mantle);
+        margin: -.5rem 1rem 0rem 1rem ;
+        padding: 1rem;
     }
     pre {
         font-family: var(--mono)

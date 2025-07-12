@@ -19,7 +19,7 @@
 
 <Dialog 
     bind:this={handle}
-    title="Preferences"
+    title="User preferences"
     onokay={(evt) => {
         // apply properties buffer
         prefs = properties;

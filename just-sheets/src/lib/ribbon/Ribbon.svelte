@@ -8,7 +8,7 @@
 <div
     class=ribbon
 >
-    {@render children()}
+    {@render children?.()}
 </div>
 
 <style>
@@ -20,7 +20,7 @@
         display: grid;
         grid-auto-flow: column;
 
-        padding: 1rem;
+        padding: .5rem;
         background-color: var(--mantle);
         border-bottom: 1px solid var(--overlay);
         outline: none;

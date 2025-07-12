@@ -13,7 +13,7 @@
 <div
     class=ribbon-section
 >
-    {@render children()}
+    {@render children?.()}
     <div
         class=ribbon-section-label
     >
@@ -32,10 +32,9 @@
         position: relative;
         grid-auto-flow: column;
         grid-template-rows: [top] 1fr [divide] 1rem [bottom];
-        padding-top: 1rem;
         justify-items: center;
         justify-content: center;
-        gap: 1rem;
+        gap: 1rem .5rem;
     }
     .ribbon-section>:global(*):not(.ribbon-section-label) {
         grid-row-start: top;
