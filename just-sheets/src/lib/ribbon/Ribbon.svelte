@@ -1,10 +1,14 @@
 <script>
+    let {
+        /** @interface */
+        children
+    } = $props()
 </script>
 
 <div
     class=ribbon
 >
-    <slot></slot>
+    {@render children()}
 </div>
 
 <style>

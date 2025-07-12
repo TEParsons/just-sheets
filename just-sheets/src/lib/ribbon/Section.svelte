@@ -1,14 +1,27 @@
 <script>
-    export let label;
+    let {
+        /** @prop @type {string} Label for this section */
+        label,
+        /** @prop @type {string|undefined} Icon for this section, if any */
+        icon=undefined,
+        /** @interface */
+        children
+    } = $props()
+    
 </script>
 
 <div
     class=ribbon-section
 >
-    <slot></slot>
+    {@render children()}
     <div
         class=ribbon-section-label
     >
+        {#if icon}
+            <img alt={label} src={icon} />
+        {:else}
+            <div></div>
+        {/if}
         {label}
     </div>
 </div>
@@ -28,6 +41,8 @@
         grid-row-start: top;
     }
     .ribbon-section-label {
+        display: grid;
+        grid-template-columns: [icon] 1rem [label] min-content;
         position: absolute;
         bottom: 0;
     }
